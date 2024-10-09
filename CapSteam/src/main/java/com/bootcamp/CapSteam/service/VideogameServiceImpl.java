@@ -2,6 +2,7 @@ package com.bootcamp.CapSteam.service;
 
 import java.util.Optional;
 
+import com.bootcamp.CapSteam.repository.VideogameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,6 @@ import com.bootcamp.CapSteam.dto.VideogameDto;
 import com.bootcamp.CapSteam.model.Publisher;
 import com.bootcamp.CapSteam.model.Videogame;
 import com.bootcamp.CapSteam.repository.PublisherRepository;
-import com.bootcamp.CapSteam.repository.VideogameRepository;
 
 @Service
 public class VideogameServiceImpl implements VideogameService{
@@ -51,9 +51,17 @@ public class VideogameServiceImpl implements VideogameService{
 	    	videogame.setPublisher(newPublisher);
 
 	    }
-	    
+
 
 	    return videogame;
 	}
+    @Override
+    public Optional<Videogame> findById(Integer id) {
+        return repository.findById(id);
+    }
 
+    @Override
+    public void updateVideogame(Videogame videogame) {
+		repository.save(videogame);
+    }
 }

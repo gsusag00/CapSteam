@@ -1,5 +1,8 @@
 package com.bootcamp.CapSteam.controller;
 
+import com.bootcamp.CapSteam.model.Videogame;
+import com.bootcamp.CapSteam.service.VideogameService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bootcamp.CapSteam.dto.VideogameDto;
 import com.bootcamp.CapSteam.service.VideogameService;
 import com.bootcamp.CapSteam.util.Genres;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/videogame")
@@ -50,6 +54,13 @@ public class VideogameController {
 
 		return "index";
 	}
+    //Recibe el videojuego a editar y devuelve la vista del formulario
+    @GetMapping("/edit/{id}")
+    public String updateVideogame(@PathVariable("id") Integer id, Model model) {
+        Videogame videogame = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid videogame with Id:" + id));
+        model.addAttribute("videogame", videogame);
+        return "editVideogame";
+    }
 
 	private Genres getGenre(String genre) {
 		try {
@@ -59,4 +70,10 @@ public class VideogameController {
 		}
 	}
 
+    // Te devuelve a la lista de videojuegos tras editarlo
+    @PutMapping
+    public String updateVideogame(@ModelAttribute("videogame") Videogame videogame) {
+        service.updateVideogame(videogame);
+        return "redirect:/videogame/findAllVideogames";
+    }
 }
