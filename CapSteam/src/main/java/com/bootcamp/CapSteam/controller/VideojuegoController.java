@@ -10,4 +10,10 @@ public class VideojuegoController {
 
 	@Autowired
 	VideojuegoService service;
+	
+	public String findAll() {
+		
+		
+		return "index";
+	}
 }

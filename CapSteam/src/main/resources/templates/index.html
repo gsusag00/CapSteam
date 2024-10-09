@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/custom.css}" />
+
+<title>CapSteam-Grupo 4</title>
+</head>
+<body>
+
+	<div class="container">
+
+		<h1>
+			Capsteam<br />
+		</h1>
+
+		<h2>Juegos disponibles</h2>
+		<p>Datos de la tabla de videojuegos</p>
+
+		<table class="table table-striped">
+			<tr>
+				<th>Nombre</th>
+				<th>Editor</th>
+				<th>Genero</th>
+				<th>Acciones</th>
+			</tr>
+			<tr th:each="vg, status : ${vgList}">
+				<td th:text="${status.index + 1}" />
+				<td th:text="${vg.name}" />
+				<td th:text="${vg.Editor.name}" />
+				<td th:text="${vg.editorl}" />
+				<td><a th:href="@{/{id}(id=${vg.id})}">Detalle</a> | <a
+					th:href="@{/edit(id=${vg.id})}">Editar</a> | <a
+					th:href="@{/delete(id=${vg.id})}">Eliminar</a></td>
+			</tr>
+
+		</table>
+		<p>
+			<a href="/new" class="btn btn-primary">Nuevo Videojuego</a>
+		</p>
+	</div>
+</body>
+</html>
