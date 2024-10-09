@@ -34,7 +34,7 @@ public class CapSteamUpdateTest01 {
     @Test
     void shouldUpdateVideogameSuccessfully() throws Exception {
         // GIVEN
-        Videogame updatedVideogame = new Videogame("Updated Game", "PC", 2024, Genres.ACTION, new Publisher("Updated Publisher"));
+        Videogame updatedVideogame = new Videogame("Updated Game", "PC", 2024, "Genres.ACTION", new Publisher("Updated Publisher"));
 
         // WHEN & THEN
         mockMvc.perform(put("/videogame/")
@@ -48,16 +48,16 @@ public class CapSteamUpdateTest01 {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(content().string(containsString("redirect:/videogame/findAllVideogames")));
 
-        verify(videogameService).updateVideogame(any(Videogame.class));
+        verify(videogameService).updateVideogame(any(com.bootcamp.CapSteam.dto.VideogameDto.class));
     }
 
     @Test
     void shouldThrowExceptionWhenUpdatingVideogame() throws Exception {
         // GIVEN
-        Videogame invalidVideogame = new Videogame("", "PC", 2024, Genres.ACTION, new Publisher("Invalid Publisher"));
+        Videogame invalidVideogame = new Videogame("", "PC", 2024, "Genres.ACTION", new Publisher("Invalid Publisher"));
 
         // WHEN
-        doThrow(new IllegalArgumentException("Invalid videogame data")).when(videogameService).updateVideogame(any(Videogame.class));
+        doThrow(new IllegalArgumentException("Invalid videogame data")).when(videogameService).updateVideogame(any(com.bootcamp.CapSteam.dto.VideogameDto.class));
 
         mockMvc.perform(put("/videogame/")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
