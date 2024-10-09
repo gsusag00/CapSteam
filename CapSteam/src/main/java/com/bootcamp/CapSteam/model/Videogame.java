@@ -1,7 +1,5 @@
 package com.bootcamp.CapSteam.model;
 
-import com.bootcamp.CapSteam.util.Genres;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -15,10 +13,7 @@ public class Videogame {
 	private String name;
 	private String platform;
 	private Integer year;
-
-	@Enumerated(EnumType.STRING)
-	private Genres genre;
-
+	private String genre;
 	private Float naSales;
 	private Float euSales;
 	private Float jpSales;
@@ -33,7 +28,7 @@ public class Videogame {
 	public Videogame() {
 	}
 
-	public Videogame(String name, String platform, Integer year, Genres genre, Publisher publisher) {
+	public Videogame(String name, String platform, Integer year, String genre, Publisher publisher) {
 		this.name = name;
 		this.platform = platform;
 		this.year = year;
@@ -73,12 +68,12 @@ public class Videogame {
 		this.year = year;
 	}
 
-	public Genres getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
-	public void setGenre(Genres genre) {
-		this.genre = genre;
+	public void setGenre(String genre) {
+		this.genre = String.valueOf(genre);
 	}
 
 	public Float getNaSales() {

@@ -55,13 +55,28 @@ public class VideogameServiceImpl implements VideogameService{
 
 	    return videogame;
 	}
+	private VideogameDto mapToVideoGameDto(Videogame videogame) {
+	    VideogameDto videogameDto = new VideogameDto();
+		videogameDto.setId(repository.getNextId());
+		videogameDto.setName(videogame.getName());
+		videogameDto.setPlatform(videogame.getPlatform());
+		videogameDto.setYear(videogame.getYear());
+		videogameDto.setGenre(videogame.getGenre());
+		videogameDto.setNaSales(videogame.getNaSales());
+		videogameDto.setEuSales(videogame.getEuSales());
+		videogameDto.setJpSales(videogame.getJpSales());
+		videogameDto.setOtherSales(videogame.getOtherSales());
+		videogameDto.setGlobalSales(videogame.getGlobalSales());
+	    return videogameDto;
+	}
     @Override
-    public Optional<Videogame> findById(Integer id) {
-        return repository.findById(id);
+    public VideogameDto findById(Integer id) {
+        return mapToVideoGameDto(repository.findById(id).get());
     }
 
-    @Override
-    public void updateVideogame(Videogame videogame) {
-		repository.save(videogame);
-    }
+	@Override
+	public void updateVideogame(VideogameDto videogameDto) {
+		repository.save(mapToVideoGame(videogameDto));
+	}
+
 }

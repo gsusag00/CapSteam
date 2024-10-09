@@ -1,6 +1,5 @@
 package com.bootcamp.CapSteam.controller;
 
-import com.bootcamp.CapSteam.model.Videogame;
 import com.bootcamp.CapSteam.service.VideogameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bootcamp.CapSteam.dto.VideogameDto;
-import com.bootcamp.CapSteam.service.VideogameService;
 import com.bootcamp.CapSteam.util.Genres;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,36 +42,55 @@ public class VideogameController {
 		videogameDto.setJpSales(0F);
 		videogameDto.setOtherSales(0F);
 		videogameDto.setGlobalSales(0F);
-		videogameDto.setPublisherName(publisherName);	
+		videogameDto.setPublisherName(publisherName);
 		service.addVideojuego(videogameDto);
 		return "redirect:/";
-		
+
 	}
 
 	public String findAll() {
-
 		return "index";
 	}
-    //Recibe el videojuego a editar y devuelve la vista del formulario
-    @GetMapping("/edit/{id}")
-    public String updateVideogame(@PathVariable("id") Integer id, Model model) {
-        Videogame videogame = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid videogame with Id:" + id));
-        model.addAttribute("videogame", videogame);
-        return "editVideogame";
-    }
 
-	private Genres getGenre(String genre) {
+    //Recibe el videojuego a editar y devuelve la vista del formulario
+	@GetMapping("/edit/{id}")
+	public String editVideogame(@PathVariable("id") Integer id, Model model) {
+		VideogameDto videogameDto = service.findById(id);
+				//.orElseThrow(() -> new IllegalArgumentException("Invalid videogame with Id:" + id));
+
+		String genre = videogameDto.getGenre();
+		//String genreUpperCase = getGenre(videogame.getGenre());
+		model.addAttribute("videogame", videogameDto);
+		model.addAttribute("genre", genre);
+		model.addAttribute("genres", Genres.values());
+
+		return "editVideogame";
+	}
+
+	// Te devuelve a la lista de videojuegos tras editarlo
+	@PutMapping("/edit/{id}")
+	public String updateVideogame(@PathVariable("id") Integer id,
+								  @ModelAttribute("videogame") VideogameDto videogame) {
+		VideogameDto existingVideogame = service.findById(id);
+				//.orElseThrow(() -> new IllegalArgumentException("Invalid videogame with Id:" + id));
+
+		existingVideogame.setName(videogame.getName());
+		existingVideogame.setPlatform(videogame.getPlatform());
+		existingVideogame.setYear(videogame.getYear());
+		existingVideogame.setGenre(getGenre(videogame.getGenre()));
+		existingVideogame.setPublisherName(videogame.getPublisherName());
+
+		service.updateVideogame(existingVideogame);
+
+		return "redirect:/videogame/findAllVideogames";
+	}
+
+	private String getGenre(String genre) {
 		try {
-			return Genres.valueOf(genre.toUpperCase());
+			return genre.toUpperCase();
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Genero invalido: " + genre);
 		}
 	}
 
-    // Te devuelve a la lista de videojuegos tras editarlo
-    @PutMapping
-    public String updateVideogame(@ModelAttribute("videogame") Videogame videogame) {
-        service.updateVideogame(videogame);
-        return "redirect:/videogame/findAllVideogames";
-    }
 }

@@ -1,35 +1,123 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/custom.css}" />
     <title>Editar Videojuego</title>
 </head>
 <body>
-<h1>Editar Videojuego</h1>
-<form th:action="@{/videogames/update/{id}(id=${videogame.id})}" th:object="${videogame}" method="post">
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" th:field="*{name}" required />
+<div id="contenedor">
+    <h2>Editar Videojuego</h2>
+    <div class="form-container">
+        <form th:action="@{/videogame/edit/{id}(id=${videogame.id})}" th:object="${videogame}" method="post">
 
-    <label for="platform">Plataforma:</label>
-    <input type="text" id="platform" th:field="*{platform}" required />
+            <!-- Nombre -->
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="name">Nombre (*)</label>
+                    <div class="col-md-7">
+                        <input type="text" id="name" th:field="*{name}" class="form-control input-sm" required />
+                        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="has-error help-inline">Error en Nombre</div>
+                    </div>
+                </div>
+            </div>
 
-    <label for="year">Año:</label>
-    <input type="number" id="year" th:field="*{year}" required />
+            <!-- Plataforma -->
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="platform">Plataforma (*)</label>
+                    <div class="col-md-7">
+                        <input type="text" id="platform" th:field="*{platform}" class="form-control input-sm" required />
+                        <div th:if="${#fields.hasErrors('platform')}" th:errors="*{platform}" class="has-error help-inline">Error en Plataforma</div>
+                    </div>
+                </div>
+            </div>
 
-    <label for="genre">Género:</label>
-    <select id="genre" th:field="*{genre}" required>
-        <option th:each="genre : ${T(com.bootcamp.CapSteam.util.Genres).values()}"
-                th:value="${genre}"
-                th:text="${genre.name()}"></option>
-    </select>
+            <!-- Año -->
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="year">Año (*)</label>
+                    <div class="col-md-7">
+                        <input type="number" id="year" th:field="*{year}" class="form-control input-sm" required />
+                        <div th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="has-error help-inline">Error en Año</div>
+                    </div>
+                </div>
+            </div>
 
-    <label for="publisher">Publisher:</label>
-    <select id="publisher" th:field="*{publisher.id}" required>
-        <option th:each="publisher : ${publishers}"
-                th:value="${publisher.id}"
-                th:text="${publisher.name()}"></option>
-    </select>
+            <!-- Género -->
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="genre">Género (*)</label>
+                    <div class="col-md-7">
+                        <select id="genre" th:field="*{genre}" class="form-control input-sm" required>
+                            <option th:each="genre : ${T(com.bootcamp.CapSteam.util.Genres).values()}"
+                                    th:value="${genre}"
+                                    th:text="${genre.name()}">Selecciona un género</option>
+                        </select>
+                        <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="has-error help-inline">Error en Género</div>
+                    </div>
+                </div>
+            </div>
 
-    <button type="submit">Actualizar Videojuego</button>
-</form>
+            <!-- Editor -->
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="publisher">Editor (*)</label>
+                    <div class="col-md-7">
+                        <select id="publisher" th:field="*{publisher.id}" class="form-control input-sm" required>
+                            <option th:each="publisher : ${publishers}"
+                                    th:value="${publisher.id}"
+                                    th:text="${publisher.name()}">Selecciona un editor</option>
+                        </select>
+                        <div th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher.id}" class="has-error help-inline">Error en Editor</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Ventas -->
+            <h3>Ventas</h3>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="naSales">Ventas en NA:</label>
+                    <div class="col-md-7">
+                        <input type="number" id="naSales" th:field="*{naSales}" class="form-control input-sm" step="0.01" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="euSales">Ventas en EU:</label>
+                    <div class="col-md-7">
+                        <input type="number" id="euSales" th:field="*{euSales}" class="form-control input-sm" step="0.01" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="jpSales">Ventas en JP:</label>
+                    <div class="col-md-7">
+                        <input type="number" id="jpSales" th:field="*{jpSales}" class="form-control input-sm" step="0.01" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label" for="otherSales">Otras Ventas:</label>
+                    <div class="col-md-7">
+                        <input type="number" id="otherSales" th:field="*{otherSales}" class="form-control input-sm" step="0.01" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de Enviar -->
+            <div class="row">
+                <div class="form-actions floatRight">
+                    <button type="submit" class="btn btn-primary btn-sm">Actualizar Videojuego</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

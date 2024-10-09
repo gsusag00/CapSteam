@@ -8,7 +8,7 @@ public class VideogameDto {
     private String name;
     private String platform;
     private Integer year;
-    private Genres genre;
+    private String genre;
     private Float naSales;
     private Float euSales;
     private Float jpSales;
@@ -19,7 +19,7 @@ public class VideogameDto {
     public VideogameDto() {
     }
 
-    public VideogameDto(Integer id, String name, String platform, Integer year, Genres genre, Float naSales, Float euSales, Float jpSales, Float otherSales, Float globalSales, String publisherName) {
+    public VideogameDto(Integer id, String name, String platform, Integer year, String genre, Float naSales, Float euSales, Float jpSales, Float otherSales, Float globalSales, String publisherName) {
         this.id = id;
         this.name = name;
         this.platform = platform;
@@ -65,11 +65,11 @@ public class VideogameDto {
         this.year = year;
     }
 
-    public Genres getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genres genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 

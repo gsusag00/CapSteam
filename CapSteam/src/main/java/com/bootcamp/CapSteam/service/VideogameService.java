@@ -11,6 +11,6 @@ public interface VideogameService {
 	public VideogameDto addVideojuego(VideogameDto videogameDto);
 		
 	
-    Optional<Videogame> findById(Integer id);
-    void updateVideogame(Videogame videogame);
+    VideogameDto findById(Integer id);
+    void updateVideogame(VideogameDto videogameDto);
 }
