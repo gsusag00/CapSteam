@@ -57,7 +57,7 @@ public class VideogameServiceImpl implements VideogameService{
 	}
 	private VideogameDto mapToVideoGameDto(Videogame videogame) {
 	    VideogameDto videogameDto = new VideogameDto();
-		videogameDto.setId(videogameDto.getId());
+		videogameDto.setId(videogame.getId());
 		videogameDto.setName(videogame.getName());
 		videogameDto.setPlatform(videogame.getPlatform());
 		videogameDto.setYear(videogame.getYear());

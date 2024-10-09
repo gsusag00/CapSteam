@@ -69,7 +69,7 @@ public class VideogameController {
 	}
 
 	// Te devuelve a la lista de videojuegos tras editarlo
-	@PutMapping("/edit/{id}")
+	@PostMapping("/edit/{id}")
 	public String updateVideogame(@PathVariable("id") Integer id,
 								  @ModelAttribute("videogame") VideogameDto videogame) {
 		VideogameDto existingVideogame = service.findById(id);
@@ -83,7 +83,7 @@ public class VideogameController {
 
 		service.updateVideogame(existingVideogame);
 
-		return "redirect:/videogame/findAllVideogames";
+		return "redirect:/";
 	}
 
 	private String getGenre(String genre) {
