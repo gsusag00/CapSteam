@@ -40,7 +40,7 @@ public class VideogameServiceImpl implements VideogameService{
 	    videogame.setJpSales(videogameDto.getJpSales());
 	    videogame.setOtherSales(videogameDto.getOtherSales());
 	    videogame.setGlobalSales(videogameDto.getGlobalSales());
-	    Optional<Publisher> publisher = publisherRepository.findPublisherByName(videogameDto.getName());
+	    Optional<Publisher> publisher = publisherRepository.findPublisherByName(videogameDto.getPublisherName());
 	    if(publisher.isPresent())
 	    	videogame.setPublisher(publisher.get());
 	    else {

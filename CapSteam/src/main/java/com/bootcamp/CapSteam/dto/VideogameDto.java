@@ -1,19 +1,48 @@
 package com.bootcamp.CapSteam.dto;
 
-import com.bootcamp.CapSteam.util.Genres;
+
+import jakarta.validation.constraints.*;
 
 public class VideogameDto {
 
     private Integer id;
+
+    @NotEmpty(message = "{NotEmpty.videogame.name}")
+    @Size(min = 2, max = 255, message = "{Size.videogame.name}")
     private String name;
+
+    @NotEmpty(message = "{NotEmpty.videogame.platform}")
     private String platform;
+
+    @NotNull(message = "{NotNull.videogame.year}")
+    @Min(value = 1950, message = "{Min.videogame.year}")
+    @Max(value = 2024, message = "{Max.videogame.year}")
     private Integer year;
+
+    @NotEmpty(message = "{NotEmpty.videogame.genre}")
     private String genre;
+
+    @NotNull(message = "{NotNull.videogame.naSales}")
+    @Min(value = 0, message = "{Min.videogame.sales}")
     private Float naSales;
+
+    @NotNull(message = "{NotNull.videogame.euSales}")
+    @Min(value = 0, message = "{Min.videogame.sales}")
     private Float euSales;
+
+    @NotNull(message = "{NotNull.videogame.jpSales}")
+    @Min(value = 0, message = "{Min.videogame.sales}")
     private Float jpSales;
+
+    @NotNull(message = "{NotNull.videogame.otherSales}")
+    @Min(value = 0, message = "{Min.videogame.sales}")
     private Float otherSales;
+
+    @NotNull(message = "{NotNull.videogame.globalSales}")
+    @Min(value = 0, message = "{Min.videogame.sales}")
     private Float globalSales;
+
+    @NotEmpty(message = "{NotEmpty.videogame.publisherName}")
     private String publisherName;
 
     public VideogameDto() {
@@ -32,6 +61,8 @@ public class VideogameDto {
         this.globalSales = globalSales;
         this.publisherName = publisherName;
     }
+
+    // Getters y Setters
 
     public Integer getId() {
         return id;

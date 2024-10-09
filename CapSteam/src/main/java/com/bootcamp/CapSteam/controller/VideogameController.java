@@ -44,6 +44,7 @@ public class VideogameController {
 		videogameDto.setGlobalSales(0F);
 		videogameDto.setPublisherName(publisherName);
 		service.addVideojuego(videogameDto);
+
 		return "redirect:/";
 
 	}
