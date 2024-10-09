@@ -28,8 +28,8 @@
 			<tr th:each="vg, status : ${vgList}">
 				<td th:text="${status.index + 1}" />
 				<td th:text="${vg.name}" />
-				<td th:text="${vg.Editor.name}" />
-				<td th:text="${vg.editorl}" />
+				<td th:text="${vg.publisher.name}" />
+				<td th:text="${vg.year}" />
 				<td><a th:href="@{/{id}(id=${vg.id})}">Detalle</a> | <a
 					th:href="@{/edit(id=${vg.id})}">Editar</a> | <a
 					th:href="@{/delete(id=${vg.id})}">Eliminar</a></td>
