@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.bootcamp.CapSteam.model.Videogame;
 
-public interface VideojuegoRepository extends JpaRepository<Videogame, Integer>{
+public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
 
 }
