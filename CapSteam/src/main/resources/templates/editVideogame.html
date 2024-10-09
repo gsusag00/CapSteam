@@ -10,7 +10,7 @@
 <div id="contenedor">
     <h2>Editar Videojuego</h2>
     <div class="form-container">
-        <form th:action="@{/videogame/edit/{id}(id=${videogame.id})}" th:object="${videogame}" method="post">
+        <form th:object="${videogame}" method="put" th:action="@{/videogame/edit/{id}(id=${videogame.id})}">
 
             <!-- Nombre -->
             <div class="row">

@@ -22,7 +22,7 @@ public class VideogameServiceImpl implements VideogameService{
 	@Override
 	public VideogameDto addVideojuego(VideogameDto videogameDto) {
 		Videogame videogame = mapToVideoGame(videogameDto);
-		
+		videogame.setId(repository.getNextId());
 		repository.save(videogame);
 		return videogameDto;
 	}
@@ -30,7 +30,7 @@ public class VideogameServiceImpl implements VideogameService{
 
 	private Videogame mapToVideoGame(VideogameDto videogameDto) {
 	    Videogame videogame = new Videogame();
-	    videogame.setId(repository.getNextId());
+	    videogame.setId(videogameDto.getId());
 	    videogame.setName(videogameDto.getName());
 	    videogame.setPlatform(videogameDto.getPlatform());
 	    videogame.setYear(videogameDto.getYear());
@@ -57,7 +57,7 @@ public class VideogameServiceImpl implements VideogameService{
 	}
 	private VideogameDto mapToVideoGameDto(Videogame videogame) {
 	    VideogameDto videogameDto = new VideogameDto();
-		videogameDto.setId(repository.getNextId());
+		videogameDto.setId(videogameDto.getId());
 		videogameDto.setName(videogame.getName());
 		videogameDto.setPlatform(videogame.getPlatform());
 		videogameDto.setYear(videogame.getYear());
@@ -67,10 +67,15 @@ public class VideogameServiceImpl implements VideogameService{
 		videogameDto.setJpSales(videogame.getJpSales());
 		videogameDto.setOtherSales(videogame.getOtherSales());
 		videogameDto.setGlobalSales(videogame.getGlobalSales());
+		if (videogame.getPublisher() != null) {
+			videogameDto.setPublisherName(videogame.getPublisher().getName());
+		}
 	    return videogameDto;
 	}
     @Override
     public VideogameDto findById(Integer id) {
+		Videogame videogame = repository.findById(id).get();
+		videogame.setId(videogame.getId());
         return mapToVideoGameDto(repository.findById(id).get());
     }
 
