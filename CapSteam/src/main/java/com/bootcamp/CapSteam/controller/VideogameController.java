@@ -17,44 +17,42 @@ public class VideogameController {
 
 	@Autowired
 	VideogameService service;
-	
-	
+
 	@GetMapping("/addVideogame")
 	public String addVideogame() {
-	    return "addVideogame";
-	}
-	@PostMapping("/addVideogame")
-	public void addVideogame(
-	        @RequestParam String name,
-	        @RequestParam String platform,
-	        @RequestParam Integer year,
-	        @RequestParam String genre,
-	        @RequestParam Integer naSales,
-	        @RequestParam Integer euSales,
-	        @RequestParam Integer jpSales,
-	        @RequestParam Integer otherSales,
-	        @RequestParam Integer globalSales,
-	        @RequestParam String publisherName) {
-		VideogameDto videogameDto = new VideogameDto();
-		videogameDto.setName(name);
-        videogameDto.setPlatform(platform);
-        videogameDto.setYear(year);
-        videogameDto.setGenre(getGenre(genre));
-        videogameDto.setNaSales(naSales);
-        videogameDto.setEuSales(euSales);
-        videogameDto.setJpSales(jpSales);
-        videogameDto.setOtherSales(otherSales);
-        videogameDto.setGlobalSales(globalSales);
-        videogameDto.setPublisherName(publisherName);
-		service.addVideojuego(videogameDto);
-	}
-	private Genres getGenre(String genre) {
-	    try {
-	        return Genres.valueOf(genre.toUpperCase());
-	    } catch (IllegalArgumentException e) {
-	        throw new IllegalArgumentException("Invalid genre: " + genre);
-	    }
+		return "addVideogame";
 	}
 
-	
+	@PostMapping("/addVideogame")
+	public void addVideogame(@RequestParam String name, @RequestParam String platform, @RequestParam Integer year,
+			@RequestParam String genre, @RequestParam Integer naSales, @RequestParam Integer euSales,
+			@RequestParam Integer jpSales, @RequestParam Integer otherSales, @RequestParam Integer globalSales,
+			@RequestParam String publisherName) {
+		VideogameDto videogameDto = new VideogameDto();
+		videogameDto.setName(name);
+		videogameDto.setPlatform(platform);
+		videogameDto.setYear(year);
+		videogameDto.setGenre(getGenre(genre));
+		videogameDto.setNaSales(naSales);
+		videogameDto.setEuSales(euSales);
+		videogameDto.setJpSales(jpSales);
+		videogameDto.setOtherSales(otherSales);
+		videogameDto.setGlobalSales(globalSales);
+		videogameDto.setPublisherName(publisherName);
+		service.addVideojuego(videogameDto);
+	}
+
+	public String findAll() {
+
+		return "index";
+	}
+
+	private Genres getGenre(String genre) {
+		try {
+			return Genres.valueOf(genre.toUpperCase());
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("Genero invalido: " + genre);
+		}
+	}
+
 }
