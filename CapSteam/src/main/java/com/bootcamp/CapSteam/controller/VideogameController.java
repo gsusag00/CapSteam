@@ -21,6 +21,7 @@ public class VideogameController {
 	@Autowired
 	VideogameService service;
 
+
 	@GetMapping("/addVideogame")
 	public String addVideogame(Model model) {
 		model.addAttribute("videogame", new VideogameDto());
@@ -83,6 +84,11 @@ public class VideogameController {
 
 		service.updateVideogame(existingVideogame);
 
+		return "redirect:/";
+	}
+	@DeleteMapping
+	public String deleteVideogame(@PathVariable("id") Integer id){
+		service.deleteVideojuego(id);
 		return "redirect:/";
 	}
 

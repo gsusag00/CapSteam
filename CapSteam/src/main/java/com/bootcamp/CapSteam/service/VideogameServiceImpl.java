@@ -27,6 +27,14 @@ public class VideogameServiceImpl implements VideogameService{
 		return videogameDto;
 	}
 
+	@Override
+	public void deleteVideojuego(Integer id) {
+		Optional<Videogame> videogame = repository.findById(id);
+		if(videogame.isEmpty())
+			throw new IllegalArgumentException("No se ha encontrado videojuego con esa id");
+		repository.delete(videogame.get());
+	}
+
 
 	private Videogame mapToVideoGame(VideogameDto videogameDto) {
 	    Videogame videogame = new Videogame();

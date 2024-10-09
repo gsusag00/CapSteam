@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface VideogameService {
 	
 	
-	public VideogameDto addVideojuego(VideogameDto videogameDto);
-		
+    VideogameDto addVideojuego(VideogameDto videogameDto);
+	void deleteVideojuego(Integer id);
 	
     VideogameDto findById(Integer id);
     void updateVideogame(VideogameDto videogameDto);
