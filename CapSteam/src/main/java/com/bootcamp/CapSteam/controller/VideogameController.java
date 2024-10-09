@@ -2,6 +2,7 @@ package com.bootcamp.CapSteam.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,27 +20,30 @@ public class VideogameController {
 	VideogameService service;
 
 	@GetMapping("/addVideogame")
-	public String addVideogame() {
+	public String addVideogame(Model model) {
+		model.addAttribute("videogame", new VideogameDto());
+		model.addAttribute("genres", Genres.values());
 		return "addVideogame";
 	}
 
 	@PostMapping("/addVideogame")
-	public void addVideogame(@RequestParam String name, @RequestParam String platform, @RequestParam Integer year,
-			@RequestParam String genre, @RequestParam Integer naSales, @RequestParam Integer euSales,
-			@RequestParam Integer jpSales, @RequestParam Integer otherSales, @RequestParam Integer globalSales,
+	public String addVideogame(@RequestParam String name, @RequestParam String platform, @RequestParam Integer year,
+			@RequestParam String genre,
 			@RequestParam String publisherName) {
 		VideogameDto videogameDto = new VideogameDto();
 		videogameDto.setName(name);
 		videogameDto.setPlatform(platform);
 		videogameDto.setYear(year);
 		videogameDto.setGenre(getGenre(genre));
-		videogameDto.setNaSales(naSales);
-		videogameDto.setEuSales(euSales);
-		videogameDto.setJpSales(jpSales);
-		videogameDto.setOtherSales(otherSales);
-		videogameDto.setGlobalSales(globalSales);
-		videogameDto.setPublisherName(publisherName);
+		videogameDto.setNaSales(0F);
+		videogameDto.setEuSales(0F);
+		videogameDto.setJpSales(0F);
+		videogameDto.setOtherSales(0F);
+		videogameDto.setGlobalSales(0F);
+		videogameDto.setPublisherName(publisherName);	
 		service.addVideojuego(videogameDto);
+		return "redirect:/";
+		
 	}
 
 	public String findAll() {
