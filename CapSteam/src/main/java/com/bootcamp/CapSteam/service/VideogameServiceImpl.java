@@ -1,9 +1,14 @@
 package com.bootcamp.CapSteam.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.bootcamp.CapSteam.repository.VideogameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.bootcamp.CapSteam.dto.VideogameDto;
@@ -69,6 +74,20 @@ public class VideogameServiceImpl implements VideogameService{
 		videogameDto.setGlobalSales(videogame.getGlobalSales());
 	    return videogameDto;
 	}
+
+	/**
+	 * Este es un método que mappea una lista de Videogame (entity) a una lista de VideogameDTO
+	 * @param vg lista de la entidad Videogame
+	 * @return una nueva lista con el mismo número de miembros y valores que la recibida
+	 */
+	private List<VideogameDto> mapToVideoGameDtoList(List<Videogame> vg) {
+		List<VideogameDto> ret = new ArrayList<>();
+		for(Videogame v : vg) {
+			ret.add(this.mapToVideoGameDto(v));
+		}
+		return ret;
+	}
+
     @Override
     public VideogameDto findById(Integer id) {
         return mapToVideoGameDto(repository.findById(id).get());
@@ -77,6 +96,11 @@ public class VideogameServiceImpl implements VideogameService{
 	@Override
 	public void updateVideogame(VideogameDto videogameDto) {
 		repository.save(mapToVideoGame(videogameDto));
+	}
+
+	@Override
+	public Page<Videogame> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
 	}
 
 }

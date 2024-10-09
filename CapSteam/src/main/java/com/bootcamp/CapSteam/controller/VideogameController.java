@@ -1,8 +1,12 @@
 package com.bootcamp.CapSteam.controller;
 
+import com.bootcamp.CapSteam.model.Videogame;
 import com.bootcamp.CapSteam.service.VideogameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bootcamp.CapSteam.dto.VideogameDto;
 import com.bootcamp.CapSteam.util.Genres;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/videogame")
@@ -48,7 +55,23 @@ public class VideogameController {
 
 	}
 
-	public String findAll() {
+	/**
+	 * Metodo que recibe la petición get y devuelve una lista con videojuegos para mostrar. De momento esta limitada a 20
+	 * @param model
+	 * @return devuelve la vista que se va a mostrar en la web
+	 */
+	@GetMapping("")
+	public String findAll(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+		List<Videogame> videogames = new ArrayList<>();
+		Pageable paging = PageRequest.of(page-1, size);
+
+		Page<Videogame> pageVg = service.findAll(paging);
+		videogames = pageVg.getContent();
+		model.addAttribute("vgList", videogames);
+		model.addAttribute("currentPage", pageVg.getNumber() + 1);
+		model.addAttribute("totalItems", pageVg.getTotalElements());
+		model.addAttribute("totalPages", pageVg.getTotalPages());
+		model.addAttribute("pageSize", size);
 		return "index";
 	}
 
