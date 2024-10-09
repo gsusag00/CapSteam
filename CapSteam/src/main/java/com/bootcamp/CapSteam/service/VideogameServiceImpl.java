@@ -30,7 +30,6 @@ public class VideogameServiceImpl implements VideogameService{
 
 	private Videogame mapToVideoGame(VideogameDto videogameDto) {
 	    Videogame videogame = new Videogame();
-	    System.out.println(repository.getNextId());
 	    videogame.setId(repository.getNextId());
 	    videogame.setName(videogameDto.getName());
 	    videogame.setPlatform(videogameDto.getPlatform());
@@ -46,6 +45,7 @@ public class VideogameServiceImpl implements VideogameService{
 	    	videogame.setPublisher(publisher.get());
 	    else {
 	    	Publisher newPublisher = new Publisher();
+			newPublisher.setId(publisherRepository.getNextId());
 	    	newPublisher.setName(videogameDto.getPublisherName());
 	    	publisherRepository.save(newPublisher);
 	    	videogame.setPublisher(newPublisher);
