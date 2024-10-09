@@ -60,7 +60,7 @@ public class VideogameController {
 	 * @param model
 	 * @return devuelve la vista que se va a mostrar en la web
 	 */
-	@GetMapping("")
+	@GetMapping
 	public String findAll(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
 		List<Videogame> videogames = new ArrayList<>();
 		Pageable paging = PageRequest.of(page-1, size);
