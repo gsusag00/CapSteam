@@ -53,7 +53,7 @@ public class VideogameController {
 		videogameDto.setPublisherName(publisherName);
 		service.addVideojuego(videogameDto);
 
-		return "redirect:/";
+		return "redirect:/videogame";
 
 	}
 
@@ -107,13 +107,14 @@ public class VideogameController {
 
 		service.updateVideogame(existingVideogame);
 
-		return "redirect:/";
+		return "redirect:/videogame";
 	}
-	@DeleteMapping
+	@PostMapping("/delete/{id}")
 	public String deleteVideogame(@PathVariable("id") Integer id){
 		service.deleteVideojuego(id);
-		return "redirect:/";
+		return "redirect:/videogame";
 	}
+
 
 	private String getGenre(String genre) {
 		try {
