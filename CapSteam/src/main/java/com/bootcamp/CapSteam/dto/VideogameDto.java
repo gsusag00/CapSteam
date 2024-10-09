@@ -9,17 +9,17 @@ public class VideogameDto {
     private String platform;
     private Integer year;
     private Genres genre;
-    private Integer naSales;
-    private Integer euSales;
-    private Integer jpSales;
-    private Integer otherSales;
-    private Integer globalSales;
+    private Float naSales;
+    private Float euSales;
+    private Float jpSales;
+    private Float otherSales;
+    private Float globalSales;
     private String publisherName;
 
     public VideogameDto() {
     }
 
-    public VideogameDto(Integer id, String name, String platform, Integer year, Genres genre, Integer naSales, Integer euSales, Integer jpSales, Integer otherSales, Integer globalSales, String publisherName) {
+    public VideogameDto(Integer id, String name, String platform, Integer year, Genres genre, Float naSales, Float euSales, Float jpSales, Float otherSales, Float globalSales, String publisherName) {
         this.id = id;
         this.name = name;
         this.platform = platform;
@@ -73,43 +73,43 @@ public class VideogameDto {
         this.genre = genre;
     }
 
-    public Integer getNaSales() {
+    public Float getNaSales() {
         return naSales;
     }
 
-    public void setNaSales(Integer naSales) {
+    public void setNaSales(Float naSales) {
         this.naSales = naSales;
     }
 
-    public Integer getEuSales() {
+    public Float getEuSales() {
         return euSales;
     }
 
-    public void setEuSales(Integer euSales) {
+    public void setEuSales(Float euSales) {
         this.euSales = euSales;
     }
 
-    public Integer getJpSales() {
+    public Float getJpSales() {
         return jpSales;
     }
 
-    public void setJpSales(Integer jpSales) {
+    public void setJpSales(Float jpSales) {
         this.jpSales = jpSales;
     }
 
-    public Integer getOtherSales() {
+    public Float getOtherSales() {
         return otherSales;
     }
 
-    public void setOtherSales(Integer otherSales) {
+    public void setOtherSales(Float otherSales) {
         this.otherSales = otherSales;
     }
 
-    public Integer getGlobalSales() {
+    public Float getGlobalSales() {
         return globalSales;
     }
 
-    public void setGlobalSales(Integer globalSales) {
+    public void setGlobalSales(Float globalSales) {
         this.globalSales = globalSales;
     }
 
