@@ -63,17 +63,14 @@
             <!-- Editor -->
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label class="col-md-3 control-label" for="publisher">Editor (*)</label>
+                    <label class="col-md-3 control-label" for="publisherName">Editor (*)</label>
                     <div class="col-md-7">
-                        <select id="publisher" th:field="*{publisher.id}" class="form-control input-sm" required>
-                            <option th:each="publisher : ${publishers}"
-                                    th:value="${publisher.id}"
-                                    th:text="${publisher.name()}">Selecciona un editor</option>
-                        </select>
-                        <div th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher.id}" class="has-error help-inline">Error en Editor</div>
+                        <input type="text" id="publisherName" th:field="*{publisherName}" class="form-control input-sm" required />
+                        <div th:if="${#fields.hasErrors('publisherName')}" th:errors="*{publisherName}" class="has-error help-inline">Error en Editor</div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Sección de Ventas -->
             <h3>Ventas</h3>
