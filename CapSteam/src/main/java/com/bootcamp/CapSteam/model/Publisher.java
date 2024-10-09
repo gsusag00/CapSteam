@@ -5,11 +5,11 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "videogame")
+@Table(name = "publisher")
 public class Publisher {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
