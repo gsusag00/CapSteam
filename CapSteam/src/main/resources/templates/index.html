@@ -26,8 +26,8 @@
 				<th>Genero</th>
 				<th>Acciones</th>
 			</tr>
-			<tr th:each="vg, status : ${vgList}">
-				<td th:text="${status.index + 1}"></td>
+			<tr th:each="vg : ${vgList}">
+				<td th:text="${vg.id}"></td>
 				<td th:text="${vg.name}"></td>
 				<td th:text="${vg.publisher.name}"></td>
 				<td th:text="${vg.year}"></td>
