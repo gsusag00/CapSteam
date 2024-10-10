@@ -18,7 +18,6 @@ import com.bootcamp.CapSteam.dto.VideogameDto;
 import com.bootcamp.CapSteam.util.Genres;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -90,6 +89,20 @@ public class VideogameController {
 		return "index";
 	}
 
+	@GetMapping("/nintendoGames")
+	public String showNintendoGames(Model model,
+									@RequestParam(defaultValue = "0") int page,
+									@RequestParam(defaultValue = "10") int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<VideogameDto> nintendoGamesPage = service.findNintendoGames(pageable);
+
+		model.addAttribute("vgList", nintendoGamesPage.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", nintendoGamesPage.getTotalPages());
+		model.addAttribute("pageSize", size);
+
+		return "nintendoGames";
+	}
 
 	//Recibe el videojuego a editar y devuelve la vista del formulario
 	@GetMapping("/edit/{id}")
@@ -134,7 +147,6 @@ public class VideogameController {
 		service.deleteVideojuego(id);
 		return "redirect:/videogame";
 	}
-
 
 
 	@ExceptionHandler(IllegalArgumentException.class)

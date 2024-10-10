@@ -1,12 +1,16 @@
 package com.bootcamp.CapSteam.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.bootcamp.CapSteam.repository.VideogameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -108,6 +112,14 @@ public class VideogameServiceImpl implements VideogameService{
 		} else {
 			throw new IllegalArgumentException("Videojuego no encontrado con ID: " + id);
 		}
+	}
+
+	@Override
+	public Page<VideogameDto> findNintendoGames(Pageable pageable) {
+		return repository.findAll(pageable)
+				.map(v -> new VideogameDto(v.getId(), v.getName(), v.getPlatform(), v.getYear(), v.getGenre(),
+						v.getNaSales(), v.getEuSales(), v.getJpSales(), v.getOtherSales(),
+						v.getGlobalSales(), v.getPublisher().toString()));
 	}
 
 	@Override
