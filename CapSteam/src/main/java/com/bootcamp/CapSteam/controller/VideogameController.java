@@ -136,6 +136,22 @@ public class VideogameController {
 		return "index";
 	}
 
+	@GetMapping("/evenYears")
+	public String findEvenYearGames(Model model,
+									@RequestParam(defaultValue = "1") int page,
+									@RequestParam(defaultValue = "10") int size) {
+		Pageable pageable = PageRequest.of(page - 1, size);
+		Page<Videogame> evenYearGames = service.findByEvenYears(pageable);
+
+		model.addAttribute("vgList", evenYearGames.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", evenYearGames.getTotalPages());
+		model.addAttribute("pageSize", size);
+
+		return "index";
+	}
+
+
 	//Recibe el videojuego a editar y devuelve la vista del formulario
 	@GetMapping("/edit/{id}")
 	public String editVideogame(@PathVariable("id") Integer id, Model model) {

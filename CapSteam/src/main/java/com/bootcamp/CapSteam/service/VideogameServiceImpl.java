@@ -137,7 +137,6 @@ public class VideogameServiceImpl implements VideogameService{
 
 	}
 
-
 	@Override
 	public Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable) {
 		return repository.findByGenreAndYear(genre.replace("_", "-"), year, pageable);
@@ -148,4 +147,8 @@ public class VideogameServiceImpl implements VideogameService{
 		return repository.findByYear(year, pageable);
 	}
 
+	@Override
+	public Page<Videogame> findByEvenYears(Pageable pageable) {
+		return repository.findByEvenYears(pageable);
+	}
 }

@@ -25,4 +25,7 @@ public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
 
     @Query("SELECT v FROM Videogame v WHERE v.publisher.name = 'Nintendo'")
     Page<Videogame> findNintendoGames(Pageable pageable);
+
+    @Query("SELECT v FROM Videogame v WHERE MOD(v.year, 2) = 0")
+    Page<Videogame> findByEvenYears(Pageable pageable);
 }
