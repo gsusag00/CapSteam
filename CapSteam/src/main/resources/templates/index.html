@@ -63,7 +63,7 @@
 			<tr th:each="vg : ${vgList}">
 				<td th:text="${vg.id}"></td>
 				<td th:text="${vg.name}"></td>
-				<td th:text="${vg.publisher != null ? vg.publisher.name : 'Unknown Publisher'}"></td>
+				<td th:text="${vg.publisher.name}"></td>
 				<td th:text="${vg.genre}"></td>
 				<td th:text="${vg.year}"></td>
 				<td>
@@ -82,14 +82,14 @@
 						<input type="hidden" name="id" th:value="${vg.id}" />
 						<button type="submit" class="btn btn-link">Eliminar</button>
 					</form>
+
 				</td>
+
 			</tr>
+
 		</table>
 
-		<p>
-			<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
-		</p>
-	</div>
+
 	<!-- Paginación para todos los juegos -->
 	<nav aria-label="Pagination" th:if="${totalPages > 0}">
 		<ul class="pagination justify-content-center">
@@ -117,6 +117,10 @@
 			</li>
 		</ul>
 	</nav>
-
+	<p>
+		<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
+		<a href="/publisher" class="btn btn-primary">Ver Editores</a>
+	</p>
+	</div>
 </body>
 </html>
