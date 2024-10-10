@@ -36,4 +36,7 @@ public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
             @Param("year") Integer year,
             @Param("publisherName") String publisherName,
             Pageable pageable);
+
+    @Query("SELECT v FROM Videogame v WHERE MOD(v.year, 2) = 0")
+    Page<Videogame> findByEvenYears(Pageable pageable);
 }

@@ -17,6 +17,7 @@
 		<div class="button-group">
 			<a th:href="@{/videogame/nintendoGames}" class="btn custom-btn">Nintendo Games</a>
 			<a th:href="@{/videogame/sigloXX}" class="btn custom-btn">20th Century Games</a>
+			<a th:href="@{/videogame/evenYears}" class="btn custom-btn">Even Year Games</a>
 		</div>
 		<h2>Formulario</h2>
 		<div class="filter-box">
@@ -62,7 +63,7 @@
 			<tr th:each="vg : ${vgList}">
 				<td th:text="${vg.id}"></td>
 				<td th:text="${vg.name}"></td>
-				<td th:text="${vg.publisher.name}"></td>
+				<td th:text="${vg.publisher != null ? vg.publisher.name : 'Unknown Publisher'}"></td>
 				<td th:text="${vg.genre}"></td>
 				<td th:text="${vg.year}"></td>
 				<td>
@@ -81,12 +82,10 @@
 						<input type="hidden" name="id" th:value="${vg.id}" />
 						<button type="submit" class="btn btn-link">Eliminar</button>
 					</form>
-
 				</td>
-
 			</tr>
-
 		</table>
+
 		<p>
 			<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
 		</p>

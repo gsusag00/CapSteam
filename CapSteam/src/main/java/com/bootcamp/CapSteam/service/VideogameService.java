@@ -28,4 +28,6 @@ public interface VideogameService {
     Page<Videogame> findByYear(Integer year, Pageable pageable);
 
     Page<Videogame> findVideogamesByFilters(String genre, Integer year, String publisherName, Pageable paging);
+
+    Page<Videogame> findByEvenYears(Pageable pageable);
 }

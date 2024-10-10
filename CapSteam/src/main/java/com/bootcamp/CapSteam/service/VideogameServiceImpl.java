@@ -155,4 +155,8 @@ public class VideogameServiceImpl implements VideogameService{
 
 	}
 
+	@Override
+	public Page<Videogame> findByEvenYears(Pageable pageable) {
+		return repository.findByEvenYears(pageable);
+	}
 }
