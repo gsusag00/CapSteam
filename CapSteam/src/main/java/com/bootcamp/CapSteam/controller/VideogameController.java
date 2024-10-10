@@ -164,7 +164,7 @@ public class VideogameController {
 	public String findEvenYearGames(Model model,
 									@RequestParam(defaultValue = "1") int page,
 									@RequestParam(defaultValue = "10") int size) throws ServletException {
-		Pageable pageable = PageRequest.of(page - 1, size);
+		Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id").ascending());
 		Page<Videogame> evenYearGames = service.findByEvenYears(pageable);
 
 		if (evenYearGames == null) {
@@ -175,6 +175,7 @@ public class VideogameController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", evenYearGames.getTotalPages());
 		model.addAttribute("pageSize", size);
+        model.addAttribute("url", "/evenYears");
 
 		return "index";
 	}
