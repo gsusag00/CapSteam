@@ -19,7 +19,9 @@ import com.bootcamp.CapSteam.util.Genres;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/videogame")
@@ -77,7 +79,22 @@ public class VideogameController {
 		return "index";
 	}
 
-    //Recibe el videojuego a editar y devuelve la vista del formulario
+	@GetMapping("/nintendoGames")
+	public String showNintendoGames(Model model,
+									@RequestParam(defaultValue = "0") int page,
+									@RequestParam(defaultValue = "10") int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<VideogameDto> nintendoGamesPage = service.findNintendoGames(pageable);
+
+		model.addAttribute("vgList", nintendoGamesPage.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", nintendoGamesPage.getTotalPages());
+		model.addAttribute("pageSize", size);
+
+		return "nintendoGames";
+	}
+
+	//Recibe el videojuego a editar y devuelve la vista del formulario
 	@GetMapping("/edit/{id}")
 	public String editVideogame(@PathVariable("id") Integer id, Model model) {
 		VideogameDto videogameDto = service.findById(id);
