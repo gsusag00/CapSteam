@@ -85,6 +85,7 @@ public class VideogameServiceImpl implements VideogameService{
 	    return videogameDto;
 	}
 
+
 	/**
 	 * Este es un método que mappea una lista de Videogame (entity) a una lista de VideogameDTO
 	 * @param vg lista de la entidad Videogame
@@ -111,11 +112,8 @@ public class VideogameServiceImpl implements VideogameService{
 	}
 
 	@Override
-	public Page<VideogameDto> findNintendoGames(Pageable pageable) {
-		return repository.findNintendoGames(pageable)
-				.map(v -> new VideogameDto(v.getId(), v.getName(), v.getPlatform(), v.getYear(), v.getGenre(),
-						v.getNaSales(), v.getEuSales(), v.getJpSales(), v.getOtherSales(),
-						v.getGlobalSales(), v.getPublisher().getName()));
+	public Page<Videogame> findNintendoGames(Pageable pageable) {
+		return repository.findNintendoGames(pageable);
 	}
 
 	@Override
@@ -132,6 +130,13 @@ public class VideogameServiceImpl implements VideogameService{
 	public Page<Videogame> findByGenre(String genre, Pageable pageable) {
 		return repository.findByGenre(genre.replace("_", "-"), pageable);
 	}
+
+	@Override
+	public Page<Videogame> findVideogamesIn20thCentury(Pageable pageable) {
+		return repository.findByYearIn20thCentury(pageable);
+
+	}
+
 
 	@Override
 	public Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable) {

@@ -14,6 +14,10 @@
 		<h1>
 			Capsteam<br />
 		</h1>
+		<div class="button-group">
+			<a th:href="@{/videogame/nintendoGames}" class="btn custom-btn">Nintendo Games</a>
+			<a th:href="@{/videogame/sigloXX}" class="btn custom-btn">20th Century Games</a>
+		</div>
 		<h2>Formulario</h2>
 		<div class="filter-box">
 			<form th:action="@{/videogame}" method="get">
@@ -76,7 +80,6 @@
 		</table>
 		<p>
 			<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
-			<a href="/videogame/nintendoGames" class="btn btn-primary">Videojuegos de Nintendo</a>
 		</p>
 	</div>
 	<!-- Paginación para todos los juegos -->

@@ -16,6 +16,9 @@ public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
 
     Page<Videogame> findByGenre(String genre, Pageable pageable);
 
+    @Query("SELECT v FROM Videogame v WHERE v.year BETWEEN 1900 AND 1999")
+    Page<Videogame> findByYearIn20thCentury(Pageable pageable);
+
     Page<Videogame> findByYear(Integer year, Pageable pageable);
 
     Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable);

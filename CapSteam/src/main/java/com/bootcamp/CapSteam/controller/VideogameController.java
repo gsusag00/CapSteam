@@ -108,14 +108,28 @@ public class VideogameController {
 									@RequestParam(defaultValue = "0") int page,
 									@RequestParam(defaultValue = "10") int size) {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<VideogameDto> nintendoGamesPage = service.findNintendoGames(pageable);
+		Page<Videogame> nintendoGamesPage = service.findNintendoGames(pageable);
 
 		model.addAttribute("vgList", nintendoGamesPage.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", nintendoGamesPage.getTotalPages());
 		model.addAttribute("pageSize", size);
 
-		return "nintendoGames";
+		return "index";
+	}
+
+	@GetMapping("/sigloXX")
+	public String getVideogamesFrom20thCentury(Model model, Pageable pageable) {
+		// Filtra los videojuegos que se lanzaron entre 1900 y 1999
+		Page<Videogame> videogames = service.findVideogamesIn20thCentury(pageable);
+
+		model.addAttribute("vgList", videogames.getContent());
+		model.addAttribute("currentPage", videogames.getNumber() + 1);
+		model.addAttribute("totalItems", videogames.getTotalElements());
+		model.addAttribute("totalPages", videogames.getTotalPages());
+		model.addAttribute("pageSize", pageable.getPageSize());
+
+		return "index";
 	}
 
 	//Recibe el videojuego a editar y devuelve la vista del formulario
