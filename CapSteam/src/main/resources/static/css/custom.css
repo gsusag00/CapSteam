@@ -82,3 +82,39 @@ span{
 .filter-box button:hover {
     background-color: #0056b3;
 }
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.custom-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4CAF50; /* Color de fondo inicial */
+    border: none;
+    border-radius: 25px; /* Botones redondeados */
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #45a049; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente */
+}
+
+.custom-btn:active {
+    transform: scale(0.98); /* Reduce el tamaño ligeramente al hacer clic */
+}
+
+.custom-btn:first-of-type {
+    background-color: #008CBA; /* Color específico para el primer botón */
+}
+
+.custom-btn:first-of-type:hover {
+    background-color: #007bb5; /* Color específico al pasar el ratón por el primer botón */
+}
+

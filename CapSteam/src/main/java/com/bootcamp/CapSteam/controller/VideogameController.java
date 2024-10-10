@@ -104,6 +104,20 @@ public class VideogameController {
 		return "nintendoGames";
 	}
 
+	@GetMapping("/sigloXX")
+	public String getVideogamesFrom20thCentury(Model model, Pageable pageable) {
+		// Filtra los videojuegos que se lanzaron entre 1900 y 1999
+		Page<Videogame> videogames = service.findVideogamesIn20thCentury(pageable);
+
+		model.addAttribute("vgList", videogames.getContent());
+		model.addAttribute("currentPage", videogames.getNumber() + 1);
+		model.addAttribute("totalItems", videogames.getTotalElements());
+		model.addAttribute("totalPages", videogames.getTotalPages());
+		model.addAttribute("pageSize", pageable.getPageSize());
+
+		return "index";
+	}
+
 	//Recibe el videojuego a editar y devuelve la vista del formulario
 	@GetMapping("/edit/{id}")
 	public String editVideogame(@PathVariable("id") Integer id, Model model) {

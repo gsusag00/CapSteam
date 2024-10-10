@@ -137,4 +137,11 @@ public class VideogameServiceImpl implements VideogameService{
 		return repository.findByGenre(genre.replace("_", "-"), pageable);
 	}
 
+	@Override
+	public Page<Videogame> findVideogamesIn20thCentury(Pageable pageable) {
+		return repository.findByYearIn20thCentury(pageable);
+
+	}
+
+
 }
