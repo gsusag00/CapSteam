@@ -15,4 +15,8 @@ public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
     Page<Videogame> findAll(Pageable pageable);
 
     Page<Videogame> findByGenre(String genre, Pageable pageable);
+
+    Page<Videogame> findByYear(Integer year, Pageable pageable);
+
+    Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable);
 }

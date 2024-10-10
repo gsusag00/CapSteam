@@ -66,14 +66,21 @@ public class VideogameController {
 			Model model,
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int size,
-			@RequestParam(required = false) String genre) {
+			@RequestParam(required = false) String genre,
+			@RequestParam(required = false) Integer year){
 
 		Pageable paging = PageRequest.of(page - 1, size);
 		Page<Videogame> pageVg;
 
 		// Si se proporciona un género, se filtra por este; de lo contrario, se muestran todos
-		if (genre != null && !genre.isEmpty()) {
+		if(year != null && genre != null && !genre.isEmpty()) {
+			pageVg = service.findByGenreAndYear(genre,year,paging);
+		}
+		else if (genre != null && !genre.isEmpty()) {
 			pageVg = service.findByGenre(genre, paging);
+		}
+		else if (year != null) {
+			pageVg = service.findByYear(year, paging);
 		} else {
 			pageVg = service.findAll(paging);
 		}

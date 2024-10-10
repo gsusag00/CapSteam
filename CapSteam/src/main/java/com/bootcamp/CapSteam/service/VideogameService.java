@@ -20,4 +20,8 @@ public interface VideogameService {
     Page<Videogame> findAll(Pageable pageable);
 
     Page<Videogame> findByGenre(String genre, Pageable paging);
+
+    Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable);
+
+    Page<Videogame> findByYear(Integer year, Pageable pageable);
 }
