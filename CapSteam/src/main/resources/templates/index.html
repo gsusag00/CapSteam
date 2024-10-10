@@ -24,12 +24,14 @@
 				<th>Nombre</th>
 				<th>Editor</th>
 				<th>Genero</th>
+				<th>Año</th>
 				<th>Acciones</th>
 			</tr>
 			<tr th:each="vg : ${vgList}">
 				<td th:text="${vg.id}"></td>
 				<td th:text="${vg.name}"></td>
 				<td th:text="${vg.publisher.name}"></td>
+				<td th:text="${vg.genre}"></td>
 				<td th:text="${vg.year}"></td>
 				<td>
 					<!-- Formulario para Detalle -->
