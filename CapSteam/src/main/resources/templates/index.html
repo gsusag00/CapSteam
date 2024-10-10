@@ -14,8 +14,25 @@
 		<h1>
 			Capsteam<br />
 		</h1>
+		<h2>Formulario</h2>
+		<div class="filter-box">
+			<form th:action="@{/videogame}" method="get">
+				<label for="genre">Filtrar por género:</label>
+				<select name="genre" id="genre">
+					<option value="">Todos</option>
+					<option value="ACTION" th:selected="${selectedGenre == 'ACTION'}">Acción</option>
+					<option value="SPORTS" th:selected="${selectedGenre == 'SPORTS'}">Deportes</option>
+					<option value="MISC" th:selected="${selectedGenre == 'MISC'}">Varios</option>
+					<option value="ROLE_PLAYING" th:selected="${selectedGenre == 'ROLE_PLAYING'}">Rol</option>
+					<option value="SHOOTER" th:selected="${selectedGenre == 'SHOOTER'}">Shooter</option>
+				</select>
+
+				<button type="submit">Filtrar</button>
+			</form>
+		</div>
 
 		<h2>Juegos disponibles</h2>
+
 		<p>Datos de la tabla de videojuegos</p>
 
 		<table class="table table-striped">

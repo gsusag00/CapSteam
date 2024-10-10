@@ -120,4 +120,9 @@ public class VideogameServiceImpl implements VideogameService{
 		return repository.findAll(pageable);
 	}
 
+	@Override
+	public Page<Videogame> findByGenre(String genre, Pageable pageable) {
+		return repository.findByGenre(genre, pageable);
+	}
+
 }

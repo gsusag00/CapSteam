@@ -63,21 +63,35 @@ public class VideogameController {
 	 * @return devuelve la vista que se va a mostrar en la web
 	 */
 	@GetMapping
-	public String findAll(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
-		List<Videogame> videogames = new ArrayList<>();
-		Pageable paging = PageRequest.of(page-1, size);
+	public String findAll(
+			Model model,
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(required = false) String genre) {
 
-		Page<Videogame> pageVg = service.findAll(paging);
-		videogames = pageVg.getContent();
+		Pageable paging = PageRequest.of(page - 1, size);
+		Page<Videogame> pageVg;
+
+		// Si se proporciona un género, se filtra por este; de lo contrario, se muestran todos
+		if (genre != null && !genre.isEmpty()) {
+			pageVg = service.findByGenre(genre, paging);
+		} else {
+			pageVg = service.findAll(paging);
+		}
+
+		List<Videogame> videogames = pageVg.getContent();
 		model.addAttribute("vgList", videogames);
 		model.addAttribute("currentPage", pageVg.getNumber() + 1);
 		model.addAttribute("totalItems", pageVg.getTotalElements());
 		model.addAttribute("totalPages", pageVg.getTotalPages());
 		model.addAttribute("pageSize", size);
+		model.addAttribute("selectedGenre", genre);
+
 		return "index";
 	}
 
-    //Recibe el videojuego a editar y devuelve la vista del formulario
+
+	//Recibe el videojuego a editar y devuelve la vista del formulario
 	@GetMapping("/edit/{id}")
 	public String editVideogame(@PathVariable("id") Integer id, Model model) {
 		VideogameDto videogameDto = service.findById(id);
@@ -120,6 +134,7 @@ public class VideogameController {
 		service.deleteVideojuego(id);
 		return "redirect:/videogame";
 	}
+
 
 
 	@ExceptionHandler(IllegalArgumentException.class)

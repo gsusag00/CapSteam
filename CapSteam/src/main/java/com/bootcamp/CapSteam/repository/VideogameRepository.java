@@ -13,4 +13,6 @@ public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
     Integer getNextId();
 
     Page<Videogame> findAll(Pageable pageable);
+
+    Page<Videogame> findByGenre(String genre, Pageable pageable);
 }

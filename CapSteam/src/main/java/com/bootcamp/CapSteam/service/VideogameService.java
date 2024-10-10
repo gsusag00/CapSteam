@@ -17,4 +17,6 @@ public interface VideogameService {
     void updateVideogame(VideogameDto videogameDto);
 
     Page<Videogame> findAll(Pageable pageable);
+
+    Page<Videogame> findByGenre(String genre, Pageable paging);
 }
