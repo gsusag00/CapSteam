@@ -6,15 +6,13 @@ import com.bootcamp.CapSteam.dto.VideogameDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
-import java.util.Optional;
 
 public interface VideogameService {
 	
 	
     VideogameDto addVideojuego(VideogameDto videogameDto);
 	void deleteVideojuego(Integer id);
-	
+
     VideogameDto findById(Integer id);
     void updateVideogame(VideogameDto videogameDto);
 

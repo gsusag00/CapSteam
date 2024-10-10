@@ -7,7 +7,6 @@ import java.util.Optional;
 import com.bootcamp.CapSteam.repository.VideogameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -100,11 +99,16 @@ public class VideogameServiceImpl implements VideogameService{
 	}
 
     @Override
-    public VideogameDto findById(Integer id) {
-		Videogame videogame = repository.findById(id).get();
-		videogame.setId(videogame.getId());
-        return mapToVideoGameDto(repository.findById(id).get());
-    }
+	public VideogameDto findById(Integer id) {
+		Optional<Videogame> optionalVideogame = repository.findById(id);
+
+		if (optionalVideogame.isPresent()) {
+			Videogame videogame = optionalVideogame.get();
+			return mapToVideoGameDto(videogame);
+		} else {
+			throw new IllegalArgumentException("Videojuego no encontrado con ID: " + id);
+		}
+	}
 
 	@Override
 	public void updateVideogame(VideogameDto videogameDto) {
