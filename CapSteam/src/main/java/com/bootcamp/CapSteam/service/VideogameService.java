@@ -14,12 +14,14 @@ public interface VideogameService {
 	void deleteVideojuego(Integer id);
 
     VideogameDto findById(Integer id);
-    Page<VideogameDto> findNintendoGames(Pageable pageable);
+    Page<Videogame> findNintendoGames(Pageable pageable);
     void updateVideogame(VideogameDto videogameDto);
 
     Page<Videogame> findAll(Pageable pageable);
 
     Page<Videogame> findByGenre(String genre, Pageable paging);
+
+    Page<Videogame> findVideogamesIn20thCentury(Pageable pageable);
 
     Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable);
 

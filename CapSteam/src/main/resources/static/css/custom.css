@@ -77,8 +77,45 @@ span{
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 .filter-box button:hover {
     background-color: #0056b3;
 }
+
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.custom-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.custom-btn:active {
+    transform: scale(0.98);
+}
+
+.custom-btn:first-of-type {
+    background-color: #008CBA;
+
+.custom-btn:first-of-type:hover {
+    background-color: #007bb5;
+}
+
