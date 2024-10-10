@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+  <link rel="stylesheet" th:href="@{/css/custom.css}" />
+  <title>Lista de Publishers</title>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="text-center">Lista de Editores</h1>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="publisher : ${publisherList}">
+      <td th:text="${publisher.id}"></td>
+      <td th:text="${publisher.name}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginación -->
+  <nav aria-label="Pagination" th:if="${totalPages > 0}">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+        <a th:href="@{/publisher(page=1)}" class="page-link"><<</a>
+      </li>
+      <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+        <a th:href="@{/publisher(page=${currentPage - 1})}" class="page-link">Prev</a>
+      </li>
+      <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+        <a class="page-link" href="#">...</a>
+      </li>
+      <li class="page-item" th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}"
+          th:classappend="${page == currentPage} ? 'active'">
+        <a th:href="@{/publisher(page=${page})}" class="page-link" th:text="${page}">1</a>
+      </li>
+      <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+        <a class="page-link" href="#">...</a>
+      </li>
+      <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+        <a th:href="@{/publisher(page=${currentPage + 1})}" class="page-link">Next</a>
+      </li>
+      <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+        <a th:href="@{/publisher(page=${totalPages})}" class="page-link">>></a>
+      </li>
+    </ul>
+  </nav>
+
+  <p>
+    <a href="/videogame" class="btn btn-primary">Ver Videojuegos</a>
+  </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/custom.css}" />
+    <title>Agregar Videojuego</title>
+</head>
+<body>
+    <div id="contenedor">
+        <h2>Agregar Videojuego</h2>
+        <div class="form-container">
+            <form method="post" th:object="${videogame}" th:action="@{/videogame/addVideogame}">
+                
+                <!-- Nombre -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label" for="name">Nombre (*)</label>
+                        <div class="col-md-7">
+                            <input type="text" th:field="*{name}" class="form-control input-sm" />
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="has-error help-inline">Error en Nombre</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plataforma -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label" for="platform">Plataforma (*)</label>
+                        <div class="col-md-7">
+                            <input type="text" th:field="*{platform}" class="form-control input-sm" />
+                            <div th:if="${#fields.hasErrors('platform')}" th:errors="*{platform}" class="has-error help-inline">Error en Plataforma</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Año -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label" for="year">Año (*)</label>
+                        <div class="col-md-7">
+                            <input type="number" th:field="*{year}" class="form-control input-sm" />
+                            <div th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="has-error help-inline">Error en Año</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Género -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label" for="genre">Género (*)</label>
+                        <div class="col-md-7">
+                            <select th:field="*{genre}" class="form-control input-sm">
+                                <option th:each="genre : ${genres}" th:value="${genre}" th:text="${genre}">Selecciona un género</option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="has-error help-inline">Error en Género</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publisher -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label" for="publisherName">Editor (*)</label>
+                        <div class="col-md-7">
+                            <input type="text" th:field="*{publisherName}" class="form-control input-sm" />
+                            <div th:if="${#fields.hasErrors('publisherName')}" th:errors="*{publisherName}" class="has-error help-inline">Error en Editor</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de Enviar -->
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit" value="Agregar Videojuego" class="btn btn-primary btn-sm">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

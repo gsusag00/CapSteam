@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            color: #721c24;
+            text-align: center;
+            padding: 50px;
+        }
+        .error-container {
+            border: 1px solid #f5c6cb;
+            background-color: #f8d7da;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1>Ups! Algo fue mal</h1>
+    <p th:text="${errorMessage}">Ha ocurrido un error inesperado</p>
+    <a href="/videogame">Volver a home</a>
+</div>
+</body>
+</html>
