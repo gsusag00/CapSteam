@@ -67,23 +67,11 @@ public class VideogameController {
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int size,
 			@RequestParam(required = false) String genre,
-			@RequestParam(required = false) Integer year){
+			@RequestParam(required = false) Integer year,
+			@RequestParam(required = false) String publisherName) {
 
 		Pageable paging = PageRequest.of(page - 1, size);
-		Page<Videogame> pageVg;
-
-		// Si se proporciona un género, se filtra por este; de lo contrario, se muestran todos
-		if(year != null && genre != null && !genre.isEmpty()) {
-			pageVg = service.findByGenreAndYear(genre,year,paging);
-		}
-		else if (genre != null && !genre.isEmpty()) {
-			pageVg = service.findByGenre(genre, paging);
-		}
-		else if (year != null) {
-			pageVg = service.findByYear(year, paging);
-		} else {
-			pageVg = service.findAll(paging);
-		}
+		Page<Videogame> pageVg = service.findVideogamesByFilters(genre, year, publisherName, paging);
 
 		List<Videogame> videogames = pageVg.getContent();
 		model.addAttribute("vgList", videogames);
@@ -92,9 +80,12 @@ public class VideogameController {
 		model.addAttribute("totalPages", pageVg.getTotalPages());
 		model.addAttribute("pageSize", size);
 		model.addAttribute("selectedGenre", genre);
+		model.addAttribute("selectedYear", year);
+		model.addAttribute("selectedPublisher", publisherName);
 
 		return "index";
 	}
+
 
 	@GetMapping("/details/{id}")
 	public String getVideogameDetails(@PathVariable("id") Integer id, Model model) {

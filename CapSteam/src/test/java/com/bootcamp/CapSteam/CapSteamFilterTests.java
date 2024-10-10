@@ -166,4 +166,53 @@ public class CapSteamFilterTests {
                 .andExpect(content().string(not(containsString("Pepe"))))
                 .andDo(print());
     }
+    @Test
+    void shouldReturnVideogamesForGivenPublisher() throws Exception {
+        // GIVEN
+        String publisherName = "Publisher 1";
+        List<Videogame> videogames = List.of(
+                new Videogame("Game 1", "PC", 2022, "ACTION", new Publisher(publisherName)),
+                new Videogame("Game 2", "Xbox", 2021, "SPORTS", new Publisher(publisherName))
+        );
+
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Videogame> pageVg = new PageImpl<>(videogames, pageable, videogames.size());
+
+        // WHEN: Se simula la llamada al servicio que debe devolver una página de videojuegos del editor dado
+        when(videogameService.findVideogamesByFilters(null,null,publisherName, pageable)).thenReturn(pageVg);
+
+        // THEN: Realiza la solicitud al controlador y verifica que la respuesta contiene los videojuegos
+        mockMvc.perform(get("/videogame")
+                        .param("publisherName", publisherName)
+                        .param("page", "1")
+                        .param("size", "10"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("vgList", pageVg.getContent()))
+                .andExpect(content().string(containsString("Game 1")))
+                .andExpect(content().string(containsString("Game 2")))
+                .andDo(print());
+    }
+
+    @Test
+    void shouldReturnEmptyWhenNoVideogamesForGivenPublisher() throws Exception {
+        // GIVEN
+        String publisherName = "NonExistentPublisher";
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Videogame> emptyPage = new PageImpl<>(List.of(), pageable, 0);
+
+        // WHEN: Se simula la llamada al servicio que debe devolver una página vacía
+        when(videogameService.findVideogamesByFilters(null,null,publisherName, pageable)).thenReturn(emptyPage);
+
+        // THEN: Realiza la solicitud al controlador y verifica que la respuesta es vacía
+        mockMvc.perform(get("/videogame")
+                        .param("publisherName", publisherName)
+                        .param("page", "1")
+                        .param("size", "10"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("vgList", emptyPage.getContent()))
+                .andExpect(content().string(not(containsString("Game 1"))))
+                .andExpect(content().string(not(containsString("Game 2"))))
+                .andDo(print());
+    }
+
 }
