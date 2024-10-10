@@ -112,10 +112,10 @@ public class VideogameServiceImpl implements VideogameService{
 
 	@Override
 	public Page<VideogameDto> findNintendoGames(Pageable pageable) {
-		return repository.findAll(pageable)
+		return repository.findNintendoGames(pageable)
 				.map(v -> new VideogameDto(v.getId(), v.getName(), v.getPlatform(), v.getYear(), v.getGenre(),
 						v.getNaSales(), v.getEuSales(), v.getJpSales(), v.getOtherSales(),
-						v.getGlobalSales(), v.getPublisher().toString()));
+						v.getGlobalSales(), v.getPublisher().getName()));
 	}
 
 	@Override
