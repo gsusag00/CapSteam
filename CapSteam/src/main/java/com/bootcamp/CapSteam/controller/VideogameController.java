@@ -3,6 +3,7 @@ package com.bootcamp.CapSteam.controller;
 import com.bootcamp.CapSteam.model.Videogame;
 import com.bootcamp.CapSteam.service.VideogameService;
 
+import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -139,9 +140,13 @@ public class VideogameController {
 	@GetMapping("/evenYears")
 	public String findEvenYearGames(Model model,
 									@RequestParam(defaultValue = "1") int page,
-									@RequestParam(defaultValue = "10") int size) {
+									@RequestParam(defaultValue = "10") int size) throws ServletException {
 		Pageable pageable = PageRequest.of(page - 1, size);
 		Page<Videogame> evenYearGames = service.findByEvenYears(pageable);
+
+		if (evenYearGames == null) {
+			throw new ServletException("No se encontraron videojuegos de años pares");
+		}
 
 		model.addAttribute("vgList", evenYearGames.getContent());
 		model.addAttribute("currentPage", page);
@@ -150,6 +155,7 @@ public class VideogameController {
 
 		return "index";
 	}
+
 
 
 	//Recibe el videojuego a editar y devuelve la vista del formulario
