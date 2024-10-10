@@ -15,7 +15,7 @@ import com.bootcamp.CapSteam.repository.PublisherRepository;
 public class VideogameServiceImpl implements VideogameService{
 	@Autowired
 	VideogameRepository repository;
-	
+
 	@Autowired
 	PublisherRepository publisherRepository;
 
@@ -72,12 +72,18 @@ public class VideogameServiceImpl implements VideogameService{
 		}
 	    return videogameDto;
 	}
+
     @Override
-    public VideogameDto findById(Integer id) {
-		Videogame videogame = repository.findById(id).get();
-		videogame.setId(videogame.getId());
-        return mapToVideoGameDto(repository.findById(id).get());
-    }
+	public VideogameDto findById(Integer id) {
+		Optional<Videogame> optionalVideogame = repository.findById(id);
+
+		if (optionalVideogame.isPresent()) {
+			Videogame videogame = optionalVideogame.get();
+			return mapToVideoGameDto(videogame);
+		} else {
+			throw new IllegalArgumentException("Videojuego no encontrado con ID: " + id);
+		}
+	}
 
 	@Override
 	public void updateVideogame(VideogameDto videogameDto) {

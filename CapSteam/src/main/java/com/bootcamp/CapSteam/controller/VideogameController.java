@@ -57,10 +57,8 @@ public class VideogameController {
 	@GetMapping("/edit/{id}")
 	public String editVideogame(@PathVariable("id") Integer id, Model model) {
 		VideogameDto videogameDto = service.findById(id);
-				//.orElseThrow(() -> new IllegalArgumentException("Invalid videogame with Id:" + id));
 
 		String genre = videogameDto.getGenre();
-		//String genreUpperCase = getGenre(videogame.getGenre());
 		model.addAttribute("videogame", videogameDto);
 		model.addAttribute("genre", genre);
 		model.addAttribute("genres", Genres.values());
@@ -72,8 +70,16 @@ public class VideogameController {
 	@PostMapping("/edit/{id}")
 	public String updateVideogame(@PathVariable("id") Integer id,
 								  @ModelAttribute("videogame") VideogameDto videogame) {
+		if (videogame.getName() == null || videogame.getName().isEmpty() ||
+				videogame.getPlatform() == null || videogame.getPlatform().isEmpty() ||
+				videogame.getYear() == null ||
+				videogame.getGenre() == null || videogame.getGenre().isEmpty() ||
+				videogame.getPublisherName() == null || videogame.getPublisherName().isEmpty()) {
+
+			throw new IllegalArgumentException("Los campos no pueden estar vacíos");
+		}
+
 		VideogameDto existingVideogame = service.findById(id);
-				//.orElseThrow(() -> new IllegalArgumentException("Invalid videogame with Id:" + id));
 
 		existingVideogame.setName(videogame.getName());
 		existingVideogame.setPlatform(videogame.getPlatform());
@@ -85,6 +91,13 @@ public class VideogameController {
 
 		return "redirect:/";
 	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	public String handleIllegalArgumentException(IllegalArgumentException e, Model model) {
+		model.addAttribute("errorMessage", e.getMessage());
+		return "error";
+	}
+
 
 	private String getGenre(String genre) {
 		try {
