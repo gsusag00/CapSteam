@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.bootcamp.CapSteam.model.Videogame;
+import org.springframework.data.repository.query.Param;
 
 public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
 
@@ -25,4 +26,14 @@ public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
 
     @Query("SELECT v FROM Videogame v WHERE v.publisher.name = 'Nintendo'")
     Page<Videogame> findNintendoGames(Pageable pageable);
+
+    @Query("SELECT v FROM Videogame v " +
+            "WHERE (:genre IS NULL OR :genre = '' OR v.genre = :genre) " +
+            "AND (:year IS NULL OR v.year = :year) " +
+            "AND (:publisherName IS NULL OR :publisherName = '' OR v.publisher.name = :publisherName)")
+    Page<Videogame> findVideogamesByFilters(
+            @Param("genre") String genre,
+            @Param("year") Integer year,
+            @Param("publisherName") String publisherName,
+            Pageable pageable);
 }

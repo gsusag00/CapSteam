@@ -6,7 +6,7 @@
     border-radius: 4px;
     margin: auto;
     margin-top: 20px;
-    margin-bottom: 20px;  
+    margin-bottom: 20px;
 }
 h2{
 	text-align:center;
@@ -32,7 +32,7 @@ h2{
     border-radius: 4px;
     margin: auto;
     margin-top: 20px;
-    margin-bottom: 20px;    
+    margin-bottom: 20px;
 }
 span{
 	margin-left:8px;
@@ -58,13 +58,17 @@ span{
     color: #333;
 }
 
-.filter-box select {
+.filter-box select, .filter-box input[type="number"], .filter-box input[type="text"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+}
+
+.filter-box input[type="text"] {
+    margin-bottom: 20px;
 }
 
 .filter-box button {
