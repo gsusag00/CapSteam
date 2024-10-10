@@ -87,10 +87,8 @@
 			</tr>
 
 		</table>
-		<p>
-			<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
-		</p>
-	</div>
+
+
 	<!-- Paginación para todos los juegos -->
 	<nav aria-label="Pagination" th:if="${totalPages > 0}">
 		<ul class="pagination justify-content-center">
@@ -118,6 +116,10 @@
 			</li>
 		</ul>
 	</nav>
-
+	<p>
+		<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
+		<a href="/publisher" class="btn btn-primary">Ver Editores</a>
+	</p>
+	</div>
 </body>
 </html>
