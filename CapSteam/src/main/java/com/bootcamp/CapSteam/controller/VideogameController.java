@@ -108,14 +108,14 @@ public class VideogameController {
 									@RequestParam(defaultValue = "0") int page,
 									@RequestParam(defaultValue = "10") int size) {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<VideogameDto> nintendoGamesPage = service.findNintendoGames(pageable);
+		Page<Videogame> nintendoGamesPage = service.findNintendoGames(pageable);
 
 		model.addAttribute("vgList", nintendoGamesPage.getContent());
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", nintendoGamesPage.getTotalPages());
 		model.addAttribute("pageSize", size);
 
-		return "nintendoGames";
+		return "index";
 	}
 
 	@GetMapping("/sigloXX")

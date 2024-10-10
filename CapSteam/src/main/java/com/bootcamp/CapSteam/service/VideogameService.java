@@ -14,7 +14,7 @@ public interface VideogameService {
 	void deleteVideojuego(Integer id);
 
     VideogameDto findById(Integer id);
-    Page<VideogameDto> findNintendoGames(Pageable pageable);
+    Page<Videogame> findNintendoGames(Pageable pageable);
     void updateVideogame(VideogameDto videogameDto);
 
     Page<Videogame> findAll(Pageable pageable);
