@@ -138,11 +138,24 @@ public class VideogameServiceImpl implements VideogameService{
 	}
 
 
+	/**
+	 * Este metodo filtra los videojuegos según su genero y el año en el que fueron publicados
+	 * @param genre El genero por el que filtrar
+	 * @param year El año en el que se publico
+	 * @param pageable Para la paginación
+	 * @return devuelve un objeto de tipo Page<Videogame> con los valores
+	 */
 	@Override
 	public Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable) {
 		return repository.findByGenreAndYear(genre.replace("_", "-"), year, pageable);
 	}
 
+	/**
+	 * Este metodo filtra los videojuegos según su el año en el que fueron publicados
+	 * @param year El año en el que se publico
+	 * @param pageable Para la paginación
+	 * @return
+	 */
 	@Override
 	public Page<Videogame> findByYear(Integer year, Pageable pageable) {
 		return repository.findByYear(year, pageable);
@@ -159,4 +172,11 @@ public class VideogameServiceImpl implements VideogameService{
 	public Page<Videogame> findByEvenYears(Pageable pageable) {
 		return repository.findByEvenYears(pageable);
 	}
+	@Override
+	public Page<Videogame> getBestsellers(Pageable paging) {
+		//Primero obtenemos la media de ventas de todos los juegos
+		Double avgSales = repository.getAverageSales();
+		return repository.findBestsellers(avgSales, paging);
+	}
+
 }

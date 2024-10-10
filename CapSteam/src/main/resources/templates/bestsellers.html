@@ -12,20 +12,16 @@
 	<div class="container">
 
 		<h1>
-			<a th:href="@{/videogame}" style="text-decoration: none; color: inherit;">
-				Capsteam<br />
-			</a>
+			Capsteam<br />
 		</h1>
 		<div class="button-group">
 			<a th:href="@{/videogame/nintendoGames}" class="btn custom-btn">Nintendo Games</a>
 			<a th:href="@{/videogame/sigloXX}" class="btn custom-btn">20th Century Games</a>
-			<a th:href="@{/videogame/evenYears}" class="btn custom-btn">Even Year Games</a>
 			<a th:href="@{/videogame/bestsellers}" class="btn custom-btn">Bestsellers</a>
 		</div>
 		<h2>Formulario</h2>
 		<div class="filter-box">
 			<form th:action="@{/videogame}" method="get">
-				<!-- Filtro por género -->
 				<label for="genre">Filtrar por género:</label>
 				<select name="genre" id="genre">
 					<option value="">TODOS</option>
@@ -35,20 +31,12 @@
 					<option value="ROLE_PLAYING" th:selected="${selectedGenre == 'ROLE_PLAYING'}">ROLE_PLAYING</option>
 					<option value="SHOOTER" th:selected="${selectedGenre == 'SHOOTER'}">SHOOTER</option>
 				</select>
-
-				<!-- Filtro por año -->
 				<label for="year">Filtrar por año:</label>
-				<input type="number" id="year" name="year" min="1900" max="2050" placeholder="Año">
+				<input type="number" id="year" name="year" min="1900" max="2050">
 
-				<!-- Filtro por editor (campo de texto) -->
-				<label for="publisher">Filtrar por editor:</label>
-				<input type="text" id="publisher" name="publisherName" placeholder="Nombre del editor" th:value="${selectedPublisher}">
-
-				<!-- Botón de filtrar -->
 				<button type="submit">Filtrar</button>
 			</form>
 		</div>
-
 
 		<h2>Juegos disponibles</h2>
 
@@ -61,7 +49,7 @@
 				<th>Editor</th>
 				<th>Genero</th>
 				<th>Año</th>
-				<th>Acciones</th>
+				<th>Ventas</th>
 			</tr>
 			<tr th:each="vg : ${vgList}">
 				<td th:text="${vg.id}"></td>
@@ -69,30 +57,15 @@
 				<td th:text="${vg.publisher.name}"></td>
 				<td th:text="${vg.genre}"></td>
 				<td th:text="${vg.year}"></td>
-				<td>
-					<!-- Formulario para Detalle -->
-					<form th:action="@{/videogame/details/{id}(id=${vg.id})}" method="get" style="display:inline;">
-						<button type="submit" class="btn btn-link">Detalle</button>
-					</form>
-
-					<!-- Formulario para Editar -->
-					<form th:action="@{/videogame/edit/{id}(id=${vg.id})}" method="get" style="display:inline;">
-						<button type="submit" class="btn btn-link">Editar</button>
-					</form>
-
-					<!-- Formulario para Eliminar -->
-					<form th:action="@{/videogame/delete/{id}(id=${vg.id})}" method="post" style="display:inline;">
-						<input type="hidden" name="id" th:value="${vg.id}" />
-						<button type="submit" class="btn btn-link">Eliminar</button>
-					</form>
-
-				</td>
+				<td th:text="${vg.globalSales}"></td>
 
 			</tr>
 
 		</table>
-
-
+		<p>
+			<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
+		</p>
+	</div>
 	<!-- Paginación para todos los juegos -->
 	<nav aria-label="Pagination" th:if="${totalPages > 0}">
 		<ul class="pagination justify-content-center">
@@ -120,10 +93,6 @@
 			</li>
 		</ul>
 	</nav>
-	<p>
-		<a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
-		<a href="/publisher" class="btn btn-primary">Ver Editores</a>
-	</p>
-	</div>
+
 </body>
 </html>
