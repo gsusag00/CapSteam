@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/custom.css}"/>
+    <title>Juegos Nintendo - CapSteam-Grupo 4</title>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Capsteam - Juegos de Nintendo</h1>
+
+    <h2>Juegos publicados por Nintendo</h2>
+    <p>Lista de videojuegos cuyos publishers son Nintendo</p>
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Editor</th>
+            <th>Género</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="vg : ${vgList}">
+            <td th:text="${vg.id}"></td>
+            <td th:text="${vg.name}"></td>
+            <td th:text="${vg.platform}"></td> <!-- Cambia aquí de vg.publisher.name a vg.platform -->
+            <td th:text="${vg.year}"></td>
+            <td>
+                <!-- Formulario para Detalle -->
+                <form th:action="@{/detail/{id}(id=${vg.id})}" method="get" style="display:inline;">
+                    <button type="submit" class="btn btn-link">Detalle</button>
+                </form>
+
+                <!-- Formulario para Editar -->
+                <form th:action="@{/videogame/edit/{id}(id=${vg.id})}" method="get" style="display:inline;">
+                    <button type="submit" class="btn btn-link">Editar</button>
+                </form>
+
+                <!-- Formulario para Eliminar -->
+                <form th:action="@{/videogame/delete/{id}(id=${vg.id})}" method="post" style="display:inline;">
+                    <input type="hidden" name="id" th:value="${vg.id}"/>
+                    <button type="submit" class="btn btn-link">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+    <p>
+        <a href="/videogame/addVideogame" class="btn btn-primary">Nuevo Videojuego</a>
+        <a href="/videogame/nintendoGames" class="btn btn-primary">Videojuegos de Nintendo</a>
+    </p>
+</div>
+
+<!-- Paginación para juegos de Nintendo -->
+<nav aria-label="Pagination" th:if="${totalPages > 0}">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging('/videogame/nintendoGames', 1, '<<', 'First Page')"></a>
+        </li>
+        <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging('/videogame/nintendoGames', ${currentPage - 1}, 'Prev', 'Previous Page')"></a>
+        </li>
+        <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+            <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+            th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+            <a th:replace="fragments/paging :: paging('/videogame/nintendoGames', ${page}, ${page}, 'Page ' + ${page})"></a>
+        </li>
+        <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+            <a class="page-link" href="#">...</a>
+        </li>
+        <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging('/videogame/nintendoGames', ${currentPage + 1}, 'Next', 'Next Page')"></a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <a th:replace="fragments/paging :: paging('/videogame/nintendoGames', ${totalPages}, '>>', 'Last Page')"></a>
+        </li>
+    </ul>
+</nav>
+
+</body>
+</html>
