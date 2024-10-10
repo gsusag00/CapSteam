@@ -96,6 +96,13 @@ public class VideogameController {
 		return "index";
 	}
 
+	@GetMapping("/details/{id}")
+	public String getVideogameDetails(@PathVariable("id") Integer id, Model model) {
+		VideogameDto videogameDto = service.findById(id);
+		model.addAttribute("videogame", videogameDto);
+		return "videogameDetails";
+	}
+
 	@GetMapping("/nintendoGames")
 	public String showNintendoGames(Model model,
 									@RequestParam(defaultValue = "0") int page,

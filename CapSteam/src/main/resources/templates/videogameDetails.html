@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/custom.css}" />
+    <title>Detalles del Videojuego</title>
+</head>
+<body>
+<div id="contenedor">
+    <h2>Detalles del Videojuego</h2>
+    <div class="form-container">
+        <div class="details-container">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Nombre:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.name}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Plataforma:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.platform}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Año:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.year}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Género:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.genre}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Editor:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.publisherName}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Ventas</h3>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Ventas en NA:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.naSales}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Ventas en EU:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.euSales}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Ventas en JP:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.jpSales}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-label">Otras Ventas:</label>
+                    <div class="col-md-7">
+                        <p th:text="${videogame.otherSales}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones para Editar o Volver -->
+            <div class="row">
+                <div class="form-actions floatRight">
+                    <a th:href="@{/videogame/edit/{id}(id=${videogame.id})}" class="btn btn-warning btn-sm">Editar Videojuego</a>
+                    <a th:href="@{/videogame}" class="btn btn-secondary btn-sm">Volver a la Lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

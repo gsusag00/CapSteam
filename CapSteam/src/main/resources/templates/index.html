@@ -54,7 +54,7 @@
 				<td th:text="${vg.year}"></td>
 				<td>
 					<!-- Formulario para Detalle -->
-					<form th:action="@{/detail(id=${vg.id})}" method="get" style="display:inline;">
+					<form th:action="@{/videogame/details/{id}(id=${vg.id})}" method="get" style="display:inline;">
 						<button type="submit" class="btn btn-link">Detalle</button>
 					</form>
 

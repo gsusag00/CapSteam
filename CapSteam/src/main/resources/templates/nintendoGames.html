@@ -19,8 +19,8 @@
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Editor</th>
-            <th>Género</th>
+            <th>Plataforma</th>
+            <th>Año</th>
             <th>Acciones</th>
         </tr>
         <tr th:each="vg : ${vgList}">
@@ -30,7 +30,7 @@
             <td th:text="${vg.year}"></td>
             <td>
                 <!-- Formulario para Detalle -->
-                <form th:action="@{/detail/{id}(id=${vg.id})}" method="get" style="display:inline;">
+                <form th:action="@{/videogame/details/{id}(id=${vg.id})}" method="get" style="display:inline;">
                     <button type="submit" class="btn btn-link">Detalle</button>
                 </form>
 
