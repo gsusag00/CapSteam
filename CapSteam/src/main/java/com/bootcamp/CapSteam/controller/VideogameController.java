@@ -98,9 +98,13 @@ public class VideogameController {
 
 	@GetMapping("/details/{id}")
 	public String getVideogameDetails(@PathVariable("id") Integer id, Model model) {
-		VideogameDto videogameDto = service.findById(id);
-		model.addAttribute("videogame", videogameDto);
-		return "videogameDetails";
+		try {
+			VideogameDto videogameDto = service.findById(id);
+			model.addAttribute("videogame", videogameDto);
+			return "videogameDetails";
+		} catch (IllegalArgumentException ex) {
+			return "error";
+		}
 	}
 
 	@GetMapping("/nintendoGames")
