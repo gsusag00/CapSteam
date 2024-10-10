@@ -122,7 +122,7 @@ public class VideogameServiceImpl implements VideogameService{
 
 	@Override
 	public Page<Videogame> findByGenre(String genre, Pageable pageable) {
-		return repository.findByGenre(genre, pageable);
+		return repository.findByGenre(genre.replace("_", "-"), pageable);
 	}
 
 }
