@@ -114,6 +114,7 @@ span{
 
 .custom-btn:first-of-type {
     background-color: #008CBA;
+}
 
 .custom-btn:first-of-type:hover {
     background-color: #007bb5;

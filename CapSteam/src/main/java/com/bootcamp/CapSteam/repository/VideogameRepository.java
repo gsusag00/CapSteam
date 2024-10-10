@@ -25,4 +25,10 @@ public interface VideogameRepository extends JpaRepository<Videogame, Integer>{
 
     @Query("SELECT v FROM Videogame v WHERE v.publisher.name = 'Nintendo'")
     Page<Videogame> findNintendoGames(Pageable pageable);
+
+    //El * 100 es debido a que los valores se guardan con valores decimales en vez de guardarse el número de verdad
+    @Query("SELECT avg(v.globalSales) FROM Videogame v")
+    Double getAverageSales();
+    @Query("SELECT v FROM Videogame v WHERE v.globalSales> ?1")
+    Page<Videogame> findBestsellers(Double avgSales, Pageable pageable);
 }

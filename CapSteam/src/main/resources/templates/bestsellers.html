@@ -49,7 +49,7 @@
 				<th>Editor</th>
 				<th>Genero</th>
 				<th>Año</th>
-				<th>Acciones</th>
+				<th>Ventas</th>
 			</tr>
 			<tr th:each="vg : ${vgList}">
 				<td th:text="${vg.id}"></td>
@@ -57,24 +57,7 @@
 				<td th:text="${vg.publisher.name}"></td>
 				<td th:text="${vg.genre}"></td>
 				<td th:text="${vg.year}"></td>
-				<td>
-					<!-- Formulario para Detalle -->
-					<form th:action="@{/videogame/details/{id}(id=${vg.id})}" method="get" style="display:inline;">
-						<button type="submit" class="btn btn-link">Detalle</button>
-					</form>
-
-					<!-- Formulario para Editar -->
-					<form th:action="@{/videogame/edit/{id}(id=${vg.id})}" method="get" style="display:inline;">
-						<button type="submit" class="btn btn-link">Editar</button>
-					</form>
-
-					<!-- Formulario para Eliminar -->
-					<form th:action="@{/videogame/delete/{id}(id=${vg.id})}" method="post" style="display:inline;">
-						<input type="hidden" name="id" th:value="${vg.id}" />
-						<button type="submit" class="btn btn-link">Eliminar</button>
-					</form>
-
-				</td>
+				<td th:text="${vg.globalSales}"></td>
 
 			</tr>
 
