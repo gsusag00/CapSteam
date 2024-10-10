@@ -1,16 +1,12 @@
 package com.bootcamp.CapSteam.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.bootcamp.CapSteam.repository.VideogameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -143,5 +139,15 @@ public class VideogameServiceImpl implements VideogameService{
 
 	}
 
+
+	@Override
+	public Page<Videogame> findByGenreAndYear(String genre, Integer year, Pageable pageable) {
+		return repository.findByGenreAndYear(genre.replace("_", "-"), year, pageable);
+	}
+
+	@Override
+	public Page<Videogame> findByYear(Integer year, Pageable pageable) {
+		return repository.findByYear(year, pageable);
+	}
 
 }
