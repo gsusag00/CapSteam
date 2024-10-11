@@ -165,7 +165,6 @@ public class VideogameServiceImpl implements VideogameService{
 	@Override
 	public Page<Videogame> findVideogamesByFilters(String genre, Integer year, String publisherName, Pageable pageable) {
 			return repository.findVideogamesByFilters(genre, year, publisherName, pageable);
-
 	}
 
 	@Override
