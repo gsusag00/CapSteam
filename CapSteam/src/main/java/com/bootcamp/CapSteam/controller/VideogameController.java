@@ -118,7 +118,7 @@ public class VideogameController {
         model.addAttribute("totalItems", pageVg.getTotalElements());
         model.addAttribute("totalPages", pageVg.getTotalPages());
         model.addAttribute("pageSize", size);
-        model.addAttribute("url", "/bestsellers");
+        model.addAttribute("url", "/bestsellers?");
         return "bestsellers";
     }
 
@@ -133,7 +133,7 @@ public class VideogameController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", nintendoGamesPage.getTotalPages());
         model.addAttribute("pageSize", size);
-        model.addAttribute("url", "/nintendoGames");
+        model.addAttribute("url", "/nintendoGames?");
 
         return "index";
     }
@@ -151,7 +151,7 @@ public class VideogameController {
         model.addAttribute("totalItems", videogames.getTotalElements());
         model.addAttribute("totalPages", videogames.getTotalPages());
         model.addAttribute("pageSize", size);
-        model.addAttribute("url", "/sigloXX");
+        model.addAttribute("url", "/sigloXX?");
 
         return "index";
     }
@@ -171,7 +171,7 @@ public class VideogameController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", evenYearGames.getTotalPages());
 		model.addAttribute("pageSize", size);
-        model.addAttribute("url", "/evenYears");
+        model.addAttribute("url", "/evenYears?");
 
 		return "index";
 	}
